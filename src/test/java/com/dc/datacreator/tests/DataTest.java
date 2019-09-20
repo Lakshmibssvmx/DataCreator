@@ -28,7 +28,7 @@ public class DataTest
 		restLib = new RestLib();
 	}
 	
-	@Test(priority=1,enabled=false, description="DCDATA_01: To create data")
+	@Test(priority=1,enabled=true, description="DCDATA_01: To create data")
 	public void accountTest() throws IOException 
 	{
 		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "ACCOUNT_NUM"));
@@ -60,7 +60,7 @@ public class DataTest
 	}
 		}
 	
-	@Test(priority=2,enabled=false, description="DCDATA_02: To create product data")
+	@Test(priority=2,enabled=true, description="DCDATA_02: To create product data")
 	public void producttest() throws IOException
 	{
 		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "PRODUCT_NUM"));
@@ -81,7 +81,7 @@ public class DataTest
 			}
 		}
 	
-	@Test(priority=3,enabled=false, description="DCDATA_03: To create contact data")
+	@Test(priority=3,enabled=true, description="DCDATA_03: To create contact data")
 	public void contacttest() throws IOException
 	{
 		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "CONTACT_NUM"));
@@ -105,7 +105,7 @@ public class DataTest
 			}
 		}
 
-	@Test(priority=4,enabled=false, description="DCDATA_04: To create location data")
+	@Test(priority=4,enabled=true, description="DCDATA_04: To create location data")
 	public void locationtest() throws IOException
 	{
 		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "LOCATION_NUM"));
@@ -126,7 +126,7 @@ public class DataTest
 			sLoc_Rec=restLib.getObjectRecordID(sObjectApi,sJsonData);}
 			}
 	
-	@Test(priority=5,enabled=false, description="DCDATA_05: To create case data")
+	@Test(priority=5,enabled=true, description="DCDATA_05: To create case data")
 	public void casetest() throws IOException
 	{
 		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "CASE_NUM"));
@@ -149,7 +149,7 @@ public class DataTest
 			}
 			}
 
-	@Test(priority=6,enabled=false, description="DCDATA_06: To create team data")
+	@Test(priority=6,enabled=true, description="DCDATA_06: To create team data")
 	public void createTeamtest() throws IOException
 	{	iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "TEAM_NUM"));
 		for(int i=1;i<=iRecNum;i++) {
@@ -174,14 +174,15 @@ public class DataTest
 	@Test(priority=7,enabled=true, description="DCDATA_07: To create technician data")
 	public void createTechtest() throws IOException
 	{
-		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "TEAM_NUM"));
+		
+		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "TECH_NUM"));
 		for(int i=1;i<=iRecNum;i++) {
 			sRefName="Tech_"+i; 
 			sTeamRec=GenericLib.getExcelData("TECHNICIAN",sRefName, "SVMXC__Service_Group__c"); sTechName=GenericLib.getExcelData("TECHNICIAN",sRefName, "Name");sStreet=GenericLib.getExcelData("TECHNICIAN",sRefName, "SVMXC__Street__c"); sZip=GenericLib.getExcelData("TECHNICIAN",sRefName, "SVMXC__Zip__c");
 			sCity=GenericLib.getExcelData("TECHNICIAN",sRefName, "SVMXC__City__c"); sState=GenericLib.getExcelData("TECHNICIAN",sRefName, "SVMXC__State__c"); sCountry=GenericLib.getExcelData("TECHNICIAN",sRefName, "SVMXC__Country__c"); 
 			sObjectApi = "SVMXC__Service_Group_Members__c?";
-			sJsonData =  "{\"RecordTypeId\": \""+sRecordTypeId+"\","
-						+ "\"Name\":\""+sTeamRec+"\","
+			sJsonData =  "{\"SVMXC__Service_Group__c\": \""+sTeamRec+"\","
+						+ "\"Name\":\""+sTechName+"\","
 						+ "\"SVMXC__Street__c\":\""+sStreet+"\","
 						+ "\"SVMXC__Zip__c\":\""+sZip+"\","
 						+ "\"SVMXC__City__c\":\""+sCity+"\","
