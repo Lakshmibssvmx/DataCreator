@@ -3,12 +3,12 @@
 <suite thread-count="-1" name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.dc.datacreator.tests.DataTest">
+      <class name="com.dc.datacreator.tests.DCRulesTest">
         <methods>
           <include name="initialization"/>
-          <include name="createTechtest"/>
+          <include name="eventHovertest"/>
         </methods>
-      </class> <!-- com.dc.datacreator.tests.DataTest -->
+      </class> <!-- com.dc.datacreator.tests.DCRulesTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

@@ -19,7 +19,8 @@ public class DataTest
 	String sCaseNum=null; String sOrigin=null; String sPriority=null; String sReason=null; String sStatus=null; String sSubject=null;
 	String sTeamName=null; String sStreet=null;String sZip=null; String sCity=null; String sState=null; String sCountry=null; String sTeamRec=null;
 	String sTechName=null; 	String sTechRec=null;
-	public String sObjectApi=null; public String sJsonData = null; Boolean bIsDeleted=false; String sAcc_Rec=null; String sPro_Rec=null;String sContact_Rec=null;String sLoc_Rec=null;
+	String sDispRec=null; String sSqlQuery=null;
+	String sObjectApi=null; String sJsonData = null; Boolean bIsDeleted=false; String sAcc_Rec=null; String sPro_Rec=null;String sContact_Rec=null;String sLoc_Rec=null;
 	int iRecNum=0;
 	
 	@BeforeClass
@@ -174,7 +175,6 @@ public class DataTest
 	@Test(priority=7,enabled=true, description="DCDATA_07: To create technician data")
 	public void createTechtest() throws IOException
 	{
-		
 		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "TECH_NUM"));
 		for(int i=1;i<=iRecNum;i++) {
 			sRefName="Tech_"+i; 
@@ -196,4 +196,21 @@ public class DataTest
 			GenericLib.setExcelData("TECHNICIAN", "Tech_"+i, "TechID", sTechRec);
 			}
 	}
+	
+	@Test(priority=8,enabled=true, description="DCDATA_08: To create technician data")
+	public void addDispatcher() throws IOException
+	{
+		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "TEAM_NUM"));
+		for(int i=1;i<=iRecNum;i++) {
+			sRefName="Team_"+i;
+			sDispRec=GenericLib.getExcelData("TEAM", sRefName, "DispRec");
+			sTeamRec=GenericLib.getExcelData("TEAM", sRefName, "TeamID");
+			sObjectApi = "SVMXC__Dispatcher_Access__c?";
+			sJsonData =  "{\"SVMXC__Dispatcher__c\": \""+sDispRec+"\","
+						+ "\"SVMXC__Service_Team__c\":\""+sTeamRec+"\"}";
+			sTechRec=restLib.getObjectRecordID(sObjectApi,sJsonData);
+			}
+	}
+	
+	
 }

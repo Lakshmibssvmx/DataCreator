@@ -84,7 +84,7 @@ public class RestLib
 	 * Description: To generate salesforce object data in the record
 	 */
 	public  String getObjectRecordID(String sObjectApiName,String sWOJson) throws IOException
-	{getOauthAccessToken();
+	{	getOauthAccessToken();
 		uURL = new URL(GenericLib.getConfigValue(GenericLib.sConfigFile, "OBJBASE_URL")+sObjectApiName
 				+ "Username="+GenericLib.getConfigValue(GenericLib.sConfigFile, "ADMIN_USN")
 				+ "&Password="+GenericLib.getConfigValue(GenericLib.sConfigFile, "ADMIN_PWD"));
@@ -130,9 +130,13 @@ public class RestLib
 	 * @author: LAKSHMI BS 
 	 * Description: To fetch the object name or id of the object created
 	 */
-	public String  getObjectName(String sObjectApiName,String sObjectID) throws IOException
-	{
-		sSQLQuery = "SELECT+name+from+"+sObjectApiName+"+Where+id+=\'"+sObjectID+"\'";
+	public String  getObjectValue(String sSQLQuery, String sFetchValue) throws IOException
+	{	String sObjectApiName="User";
+		sFetchValue="Id";
+		//sSQLQuery = "SELECT+Name+FROM+"+sObjectApiName+"+WHERE+id+=\'"+"0051F00000249NCQAY"+"\'";
+		sSQLQuery = "SELECT+Id+FROM+"+sObjectApiName+"WHERE+Name+=\'"+"Nagendra Admin"+"\'";
+		//sSQLQuery = "SELECT+Id+FROM+"+sObjectApiName+"+WHERE+Name+=\'"+"Nagendra Admin"+"\'";
+		
 		uURL = new URL(GenericLib.getConfigValue(GenericLib.sConfigFile, "OBJQUERY_URL")+sSQLQuery);
 		System.out.println(uURL);
 		httpsUrlCon = (HttpsURLConnection) uURL.openConnection();
@@ -147,6 +151,7 @@ public class RestLib
 			bBufferedReader = new BufferedReader(new InputStreamReader(httpsUrlCon.getInputStream(),StandardCharsets.UTF_8));
 			while ((sLine =bBufferedReader.readLine())!=null){
 				sStringBuilder.append(sLine);
+				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -161,12 +166,15 @@ public class RestLib
 		}
 
 		jJson = new JSONObject(sStringBuilder.toString());
+		System.out.println("*******");
+		System.out.println(jJson);
 		jarrRes = (JSONArray) jJson.get("records");
+		System.out.println(jarrRes);
 		iIterator= jarrRes.iterator();
 		while (iIterator.hasNext()) {
 			JSONObject value = (JSONObject) iIterator.next();
-			System.out.println((String) value.get("Name"));
-			sObjectName=(String) value.get("Name");
+			System.out.println((String) value.get(sFetchValue));
+			sObjectName=(String) value.get(sFetchValue);
 		}
 		return sObjectName;
 	}
@@ -218,10 +226,10 @@ public class RestLib
 	{
 		RestLib restLib = new RestLib();
 		restLib.getOauthAccessToken();
-		String sWOJson = "{\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Billing_Type__c\":\"Contract\",\"SVMXC__City__c\":\"Delhi\",\"SVMXC__Zip__c\":\"110003\",\"SVMXC__Country__c\":\"India\",\"SVMXC__State__c\":\"Haryana\"}";
-		String recordID=restLib.getObjectRecordID("SVMXC__Service_Order__c?", sWOJson);
-		//restLib.getObjectName("SVMXC__Service_Order__c", recordID);
-		System.out.println(restLib.getObjectName("SVMXC__Service_Order__c", recordID));
+		//String sWOJson = "{\"SVMXC__Order_Status__c\":\"Open\",\"SVMXC__Billing_Type__c\":\"Contract\",\"SVMXC__City__c\":\"Delhi\",\"SVMXC__Zip__c\":\"110003\",\"SVMXC__Country__c\":\"India\",\"SVMXC__State__c\":\"Haryana\"}";
+		//String recordID=restLib.getObjectRecordID("SVMXC__Service_Order__c?", sWOJson);
+		restLib.getObjectValue("SVMXC__Service_Order__c", "Name");
+	//	System.out.println(restLib.getObjectName("SVMXC__Service_Order__c", recordID));
 	}
 
 }
