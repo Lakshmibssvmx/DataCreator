@@ -3,12 +3,17 @@
 <suite thread-count="-1" name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test name="Default test(failed)">
     <classes>
-      <class name="com.dc.datacreator.tests.DCRulesTest">
+      <class name="com.dc.datacreator.tests.PerformanceTest">
         <methods>
-          <include name="initialization"/>
-          <include name="eventHovertest"/>
+          <include name="closeBrowser"/>
+          <include name="passtest"/>
+          <include name="launchBrowser"/>
+          <include name="baseStateHome"/>
+          <include name="closeChildBrowser"/>
+          <include name="login"/>
+          <include name="logout"/>
         </methods>
-      </class> <!-- com.dc.datacreator.tests.DCRulesTest -->
+      </class> <!-- com.dc.datacreator.tests.PerformanceTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

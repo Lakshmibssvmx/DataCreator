@@ -79,62 +79,106 @@ public class RestLib
 
 	}
 
-	/*
-	 * @author: LAKSHMI BS 
-	 * Description: To generate salesforce object data in the record
-	 */
-	public  String getObjectRecordID(String sObjectApiName,String sWOJson) throws IOException
-	{	getOauthAccessToken();
-		uURL = new URL(GenericLib.getConfigValue(GenericLib.sConfigFile, "OBJBASE_URL")+sObjectApiName
-				+ "Username="+GenericLib.getConfigValue(GenericLib.sConfigFile, "ADMIN_USN")
-				+ "&Password="+GenericLib.getConfigValue(GenericLib.sConfigFile, "ADMIN_PWD"));
-		httpsUrlCon = (HttpsURLConnection) uURL.openConnection();
-		httpsUrlCon.setDoOutput(true);
-		httpsUrlCon.setRequestMethod("POST");
-		httpsUrlCon.setRequestProperty("Content-Type", "application/json");
-		httpsUrlCon.setRequestProperty("Authorization", "OAuth "+sAccessToken);
+	 /*
+		 * @author: LAKSHMI BS 
+		 * Description: To fetch the object name or id of the object created
+		 */
+		public String  getObjectName(String sObjectApiName,String sObjectID) throws IOException
+		{
+			sSQLQuery = "SELECT+name+from+"+sObjectApiName+"+Where+id+=\'"+sObjectID+"\'";
+			uURL = new URL(GenericLib.getConfigValue(GenericLib.sConfigFile, "OBJQUERY_URL")+sSQLQuery);
+			System.out.println(uURL);
+			httpsUrlCon = (HttpsURLConnection) uURL.openConnection();
+			httpsUrlCon.setDoOutput(true);
+			httpsUrlCon.setRequestMethod("GET");
+			httpsUrlCon.setRequestProperty("Authorization", "OAuth "+sAccessToken);
+			httpsUrlCon.setRequestProperty("Username",GenericLib.getConfigValue(GenericLib.sConfigFile, "ADMIN_USN") );
+			httpsUrlCon.setRequestProperty("Password", GenericLib.getConfigValue(GenericLib.sConfigFile, "ADMIN_PWD"));
 
-		System.out.println("httpsUrlCon = "+httpsUrlCon);
-		OutputStream os = httpsUrlCon.getOutputStream();
-		os.write(sWOJson.getBytes());
-		os.flush();
-
-		bBufferedReader = null;
-		sStringBuilder = new StringBuilder();
-
-		try {
-			bBufferedReader = new BufferedReader(new InputStreamReader(httpsUrlCon.getInputStream()));
-			while ((sLine =bBufferedReader.readLine())!=null){
-				sStringBuilder.append(sLine);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (bBufferedReader != null) {
-				try {
-					bBufferedReader.close();
-				} catch (IOException e) {
-					e.printStackTrace();
+			sStringBuilder = new StringBuilder();
+			try {
+				bBufferedReader = new BufferedReader(new InputStreamReader(httpsUrlCon.getInputStream(),StandardCharsets.UTF_8));
+				while ((sLine =bBufferedReader.readLine())!=null){
+					sStringBuilder.append(sLine);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if (bBufferedReader != null) {
+					try {
+						bBufferedReader.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 			}
-		}
-		//System.out.println(sStringBuilder);
-		jJson = new JSONObject(sStringBuilder.toString());
-		System.out.println("JSON value = "+jJson);
-		sObjectID= (String) jJson.get("id");
-		System.out.println("Returning ID value = "+sObjectID);
-		return sObjectID;
-	}
 
+			jJson = new JSONObject(sStringBuilder.toString());
+			jarrRes = (JSONArray) jJson.get("records");
+			iIterator= jarrRes.iterator();
+			while (iIterator.hasNext()) {
+				JSONObject value = (JSONObject) iIterator.next();
+				System.out.println((String) value.get("Name"));
+				sObjectName=(String) value.get("Name");
+			}
+			return sObjectName;
+		}
+		/*
+		 * @author: LAKSHMI BS 
+		 * Description: To generate salesforce object data in the record
+		 */
+		public  String getObjectRecordID(String sObjectApiName,String sWOJson) throws IOException
+		{
+			uURL = new URL(GenericLib.getConfigValue(GenericLib.sConfigFile, "OBJBASE_URL")+sObjectApiName
+					+ "Username="+GenericLib.getConfigValue(GenericLib.sConfigFile, "ADMIN_USN")
+					+ "&Password="+GenericLib.getConfigValue(GenericLib.sConfigFile, "ADMIN_PWD"));
+			httpsUrlCon = (HttpsURLConnection) uURL.openConnection();
+			httpsUrlCon.setDoOutput(true);
+			httpsUrlCon.setRequestMethod("POST");
+			httpsUrlCon.setRequestProperty("Content-Type", "application/json");
+			httpsUrlCon.setRequestProperty("Authorization", "OAuth "+sAccessToken);
+
+			System.out.println("httpsUrlCon = "+httpsUrlCon);
+			OutputStream os = httpsUrlCon.getOutputStream();
+			os.write(sWOJson.getBytes());
+			os.flush();
+
+			bBufferedReader = null;
+			sStringBuilder = new StringBuilder();
+
+			try {
+				bBufferedReader = new BufferedReader(new InputStreamReader(httpsUrlCon.getInputStream()));
+				while ((sLine =bBufferedReader.readLine())!=null){
+					sStringBuilder.append(sLine);
+				}
+			} catch (IOException e) {
+				//e.printStackTrace();
+				System.out.println(e.getMessage());
+			} finally {
+				if (bBufferedReader != null) {
+					try {
+						bBufferedReader.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+			//System.out.println(sStringBuilder);
+			jJson = new JSONObject(sStringBuilder.toString());
+			System.out.println("JSON value = "+jJson);
+			sObjectID= (String) jJson.get("id");
+			System.out.println("Returning ID value = "+sObjectID);
+			return sObjectID;
+		}
 	 /*
 	 * @author: LAKSHMI BS 
 	 * Description: To fetch the object name or id of the object created
 	 */
 	public String  getObjectValue(String sSQLQuery, String sFetchValue) throws IOException
-	{	String sObjectApiName="User";
-		sFetchValue="Id";
+	{	//String sObjectApiName="User";
+		//sFetchValue="Id";
 		//sSQLQuery = "SELECT+Name+FROM+"+sObjectApiName+"+WHERE+id+=\'"+"0051F00000249NCQAY"+"\'";
-		sSQLQuery = "SELECT+Id+FROM+"+sObjectApiName+"WHERE+Name+=\'"+"Nagendra Admin"+"\'";
+		//sSQLQuery = "SELECT+Id+FROM+"+sObjectApiName+"WHERE+Name+=\'"+"Nagendra Admin"+"\'";
 		//sSQLQuery = "SELECT+Id+FROM+"+sObjectApiName+"+WHERE+Name+=\'"+"Nagendra Admin"+"\'";
 		
 		uURL = new URL(GenericLib.getConfigValue(GenericLib.sConfigFile, "OBJQUERY_URL")+sSQLQuery);

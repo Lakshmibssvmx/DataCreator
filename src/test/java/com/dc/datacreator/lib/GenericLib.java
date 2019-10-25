@@ -23,8 +23,13 @@ public class GenericLib
 	public static String sResources = sDirPath+"//resources";
 	public static String sTestDataFile = sResources + "//DCData.xlsx";
 	public static String sConfigFile =  sResources+"//config.properties";
-	
-	
+	public int iRowNum=0;
+	public static String sChromeDriverPath =  sResources+"//drivers//chromedriver";
+	public static String sGeckoDriverPath =  sResources+"//drivers//geckodriver";
+	public static int iVHighSleep=40000;
+	public static int iHighSleep=20000;
+	public static int iMedSleep=10000;
+	public static int iLowSleep=3000;
 	/*
 	 * @author: LAKSHMI BS 
 	 * Description: To read test data from excel sheet
@@ -69,7 +74,7 @@ public class GenericLib
 	 * Description: To write data into excel sheet
 	 */
 	public static void setExcelData(String sModuleSheet, String sTestCaseID, String sKey, String sValue) throws IOException {
-		
+	
 		FileInputStream fis = null;
 		FileOutputStream fos =null;
 		try {
@@ -78,8 +83,9 @@ public class GenericLib
 			Workbook wb = (Workbook) WorkbookFactory.create(fis);
 			Sheet sht = wb.getSheet(sModuleSheet);
 			int iRowNum = sht.getLastRowNum();
-		
+			
 			for (int i = 1; i <= iRowNum; i++) {
+				try {
 				if (sht.getRow(i).getCell(0).toString().equals(sTestCaseID)) {
 					int iCellNum = sht.getRow(i).getLastCellNum();
 					for(int j=0;j<iCellNum;j++)
@@ -90,8 +96,9 @@ public class GenericLib
 							}
 					}
 					break;
-				}
-			}
+				
+			}}catch(Exception e) {}}
+		
 			fos = new FileOutputStream(sTestDataFile);
 			wb.write(fos);
 			
