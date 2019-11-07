@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2019-10-25T11:00:18Z" name="Suite" finished-at="2019-10-25T11:01:26Z" duration-ms="67242">
+    <groups>
+    </groups>
+    <test started-at="2019-10-25T11:00:18Z" name="Test" finished-at="2019-10-25T11:01:26Z" duration-ms="67242">
+      <class name="com.dc.datacreator.tests.PerformanceTest">
+        <test-method is-config="true" signature="launchBrowser()[pri:0, instance:com.dc.datacreator.tests.PerformanceTest@3270d194]" started-at="2019-10-25T16:30:18Z" name="launchBrowser" finished-at="2019-10-25T16:30:32Z" duration-ms="13842" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchBrowser -->
+        <test-method is-config="true" signature="login()[pri:0, instance:com.dc.datacreator.tests.PerformanceTest@3270d194]" started-at="2019-10-25T16:30:32Z" name="login" finished-at="2019-10-25T16:31:02Z" duration-ms="29758" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- login -->
+        <test-method signature="passtest()[pri:1, instance:com.dc.datacreator.tests.PerformanceTest@3270d194]" started-at="2019-10-25T16:31:02Z" name="passtest" description="DCH_01: To filter based on priority and validate the assigned status of a wo" finished-at="2019-10-25T16:31:25Z" duration-ms="22976" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- passtest -->
+        <test-method is-config="true" signature="baseStateHome()[pri:0, instance:com.dc.datacreator.tests.PerformanceTest@3270d194]" started-at="2019-10-25T16:31:02Z" name="baseStateHome" finished-at="2019-10-25T16:31:02Z" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- baseStateHome -->
+        <test-method is-config="true" signature="closeChildBrowser()[pri:0, instance:com.dc.datacreator.tests.PerformanceTest@3270d194]" started-at="2019-10-25T16:31:25Z" name="closeChildBrowser" finished-at="2019-10-25T16:31:25Z" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeChildBrowser -->
+        <test-method is-config="true" signature="logout()[pri:0, instance:com.dc.datacreator.tests.PerformanceTest@3270d194]" started-at="2019-10-25T16:31:25Z" name="logout" finished-at="2019-10-25T16:31:25Z" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- logout -->
+        <test-method is-config="true" signature="closeBrowser()[pri:0, instance:com.dc.datacreator.tests.PerformanceTest@3270d194]" started-at="2019-10-25T16:31:25Z" name="closeBrowser" finished-at="2019-10-25T16:31:26Z" duration-ms="650" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- closeBrowser -->
+      </class> <!-- com.dc.datacreator.tests.PerformanceTest -->
+    </test> <!-- Test -->
+  </suite> <!-- Suite -->
+</testng-results>

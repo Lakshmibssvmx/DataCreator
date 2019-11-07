@@ -138,7 +138,7 @@ public class RestLib
 			httpsUrlCon.setRequestProperty("Content-Type", "application/json");
 			httpsUrlCon.setRequestProperty("Authorization", "OAuth "+sAccessToken);
 
-			System.out.println("httpsUrlCon = "+httpsUrlCon);
+			//System.out.println("httpsUrlCon = "+httpsUrlCon);
 			OutputStream os = httpsUrlCon.getOutputStream();
 			os.write(sWOJson.getBytes());
 			os.flush();
@@ -165,7 +165,7 @@ public class RestLib
 			}
 			//System.out.println(sStringBuilder);
 			jJson = new JSONObject(sStringBuilder.toString());
-			System.out.println("JSON value = "+jJson);
+			//System.out.println("JSON value = "+jJson);
 			sObjectID= (String) jJson.get("id");
 			System.out.println("Returning ID value = "+sObjectID);
 			return sObjectID;

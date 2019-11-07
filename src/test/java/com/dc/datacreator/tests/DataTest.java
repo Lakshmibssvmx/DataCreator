@@ -183,17 +183,17 @@ public class DataTest
 		}
 	}
 
-	@Test(priority=7,enabled=false, description="DCDATA_07: To create technician data")
+	@Test(priority=7,enabled=true, description="DCDATA_07: To create technician data")
 	public void createTechtest() throws IOException
 	{
 		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "TEAM_DATA"));
-		for(int k=1; k<=iRecNum; k++) 
+		for(int k=2; k<=iRecNum; k++) 
 		{
 		sTeamName=GenericLib.getExcelData("TEAM_DATA", "TD_"+k, "Team");
 		iTechNum=Integer.parseInt(GenericLib.getExcelData("TEAM_DATA", "TD_"+k, "TechNum"));
 		sTeamRec=GenericLib.getExcelData("TEAM_DATA","TD_"+k, "TeamRecID");
 		
-		for(int i=1;i<=iTechNum;i++) {
+		for(int i=51;i<=iTechNum;i++) {
 			sRefName="Tech_"+i; 
 			sTechName=GenericLib.getExcelData(sTeamName,sRefName, "Name");sStreet=GenericLib.getExcelData(sTeamName,sRefName, "SVMXC__Street__c"); sZip=GenericLib.getExcelData(sTeamName,sRefName, "SVMXC__Zip__c");
 			sCity=GenericLib.getExcelData(sTeamName,sRefName, "SVMXC__City__c"); sState=GenericLib.getExcelData(sTeamName,sRefName, "SVMXC__State__c"); sCountry=GenericLib.getExcelData(sTeamName,sRefName, "SVMXC__Country__c"); 
