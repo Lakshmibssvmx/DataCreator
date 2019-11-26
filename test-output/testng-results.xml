@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
+<testng-results ignored="1" total="2" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2019-11-07T01:28:08Z" name="Default suite" finished-at="2019-11-07T02:47:48Z" duration-ms="4779054">
+  <suite started-at="2019-11-26T07:30:07Z" name="Default suite" finished-at="2019-11-26T07:30:09Z" duration-ms="2139">
     <groups>
     </groups>
-    <test started-at="2019-11-07T01:28:08Z" name="Default test" finished-at="2019-11-07T02:47:48Z" duration-ms="4779054">
+    <test started-at="2019-11-26T07:30:07Z" name="Default test" finished-at="2019-11-26T07:30:09Z" duration-ms="2139">
       <class name="com.dc.datacreator.tests.EventTest">
-        <test-method is-config="true" signature="initialization()[pri:0, instance:com.dc.datacreator.tests.EventTest@60015ef5]" started-at="2019-11-07T06:58:08Z" name="initialization" finished-at="2019-11-07T06:58:11Z" duration-ms="2727" status="PASS">
+        <test-method is-config="true" signature="initialization()[pri:0, instance:com.dc.datacreator.tests.EventTest@60015ef5]" started-at="2019-11-26T13:00:07Z" name="initialization" finished-at="2019-11-26T13:00:09Z" duration-ms="2105" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- initialization -->
-        <test-method signature="eventTest()[pri:0, instance:com.dc.datacreator.tests.EventTest@60015ef5]" started-at="2019-11-07T06:58:11Z" name="eventTest" description="DCDATA_01: To create data" finished-at="2019-11-07T08:04:48Z" duration-ms="3996397" status="PASS">
+        <test-method signature="eventTest()[pri:0, instance:com.dc.datacreator.tests.EventTest@60015ef5]" started-at="2019-11-26T13:00:09Z" name="eventTest" description="DCDATA_01: To create data" finished-at="2019-11-26T13:00:09Z" duration-ms="15" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- eventTest -->
-        <test-method signature="eventNonWOTest()[pri:1, instance:com.dc.datacreator.tests.EventTest@60015ef5]" started-at="2019-11-07T08:04:48Z" name="eventNonWOTest" description="DCDATA_01: To create data" finished-at="2019-11-07T08:17:48Z" duration-ms="779906" status="PASS">
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- eventNonWOTest -->
       </class> <!-- com.dc.datacreator.tests.EventTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

@@ -15,7 +15,7 @@ public class EventTest
 	String sDrivingTimeHome=null;String sDuration=null; String sStartTime=null; String sEndTime=null; boolean bAllDay=false; String sOHTimeBefore=null;
 	String sOHTimeAfter=null; String sServiceDuration=null; String sWORecID=null; String sStatus=null; String sTechRec=null; String sType=null; 
 	String sObjectApi=null; String sJsonData = null; String sAccRec=null; String sTeam=null; int iTechNum=0;
-	int iRecNum=0;
+	int iRecNum=0;int sDay=0;
 	
 	@BeforeClass
 	public void initialization() throws IOException
@@ -24,17 +24,20 @@ public class EventTest
 		restLib.getOauthAccessToken();
 	}
 	
-	@Test(priority=0,enabled=false, description="DCDATA_01: To create data")
-	public void eventTest() throws IOException 
+	@Test(priority=0,enabled=true, description="DCDATA_01: To create data")
+	public void eventTest() throws IOException, InterruptedException 
 	{	
 		Timestamp ts=new Timestamp(System.currentTimeMillis());  
 		String sDate=java.time.LocalDate.now().toString();
-		sDate="2019-11-09";
-		System.out.println(sDate);  
 		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "TEAM_DATA"));
 		sObjectApi="SVMXC__SVMX_Event__c?";
 		
-		for(int k=35; k<=iRecNum; k++) {
+		sDay=1;
+		while(sDay<=31) {
+		sDate="2019-12-"+sDay;	
+		System.out.println(sDate);  
+		
+		for(int k=31; k<=iRecNum; k++) {
 		sTeam=GenericLib.getExcelData("TEAM_DATA", "TD_"+k, "Team");
 		iTechNum=Integer.parseInt(GenericLib.getExcelData("TEAM_DATA", "TD_"+k, "TechNum"));
 		System.out.println("Events for team "+sTeam);
@@ -79,7 +82,13 @@ public class EventTest
 				+ "\"SVMXC__WhatId__c\":\""+sWORecID+"\","
 				+ "\"SVMXC__Type__c\":\""+sType+"\"}";
 		sAccRec=restLib.getObjectRecordID(sObjectApi,sJsonData);
-	}}}	
+		
+		
+	}}
+		
+		}
+		sDay++;
+		}
 	}
 	
 	
@@ -89,11 +98,14 @@ public class EventTest
 	{	
 		Timestamp ts=new Timestamp(System.currentTimeMillis());  
 		String sDate=java.time.LocalDate.now().toString();
-		System.out.println(sDate);  
-		sDate="2019-11-09";
+		
+	
 		iRecNum=Integer.parseInt(GenericLib.getConfigValue(GenericLib.sConfigFile, "TEAM_DATA"));
 		sObjectApi="SVMXC__SVMX_Event__c?";
-		
+		sDay=1;
+		while(sDay<=31) {
+		sDate="2019-12-"+sDay;	
+		System.out.println(sDate); 
 		for(int k=31; k<=iRecNum; k++) {
 		sTeam=GenericLib.getExcelData("TEAM_DATA", "TD_"+k, "Team");
 		iTechNum=Integer.parseInt(GenericLib.getExcelData("TEAM_DATA", "TD_"+k, "TechNum"));
@@ -136,6 +148,8 @@ public class EventTest
 				+ "\"SVMXC__Type__c\":\""+sType+"\"}";
 		sAccRec=restLib.getObjectRecordID(sObjectApi,sJsonData);
 	}}
+	}
+		sDay++;
 	}
 }
 
